@@ -236,7 +236,7 @@ if selected == 'Insight Negara-Negara':
     }
 
     high_correlation_pairs = [(feature_map.get(pair[0], pair[0]), feature_map.get(pair[1], pair[1]), matrix_corr.loc[pair[0], pair[1]]) for pair in high_correlation_pairs]
-    st.write("Melalui analisis heatmap, ditemukan fakta terkait skor-skor tujuan SDG, yaitu terdapat hubungan korelasi yang unik, baik positif maupun negatif, antara beberapa skor. Berikut adalah korelasi skor-skor SDG.")
+    st.write("✅Melalui analisis heatmap, ditemukan fakta terkait skor-skor tujuan SDG, yaitu terdapat hubungan korelasi yang unik, baik positif maupun negatif, antara beberapa skor. Berikut adalah korelasi skor-skor SDG.")
     if high_correlation_pairs:
         st.subheader("Pasangan dengan korelasi tinggi (>|0.7|):")
         for pair in high_correlation_pairs:
@@ -267,7 +267,7 @@ elif selected == 'Insight Indonesia':
     plt.xticks(rotation=45)
     st.pyplot(plt.gcf())
     plt.close()
-    st.write("Skor SDG tertinggi yang dimiliki oleh indonesia yaitu di bidang Climate Action, Quality Education, dan Konsumsi Produksi Bertanggung Jawab. Dari bar ini juga dapat kita liat bahwa Indonesia harus menekankan dalam bidang Partnership for The Goals, Kehidupan di Darat, dan Industri Inovasi dan Infrastruktur")
+    st.write("✅Indonesia mencapai skor SDG tertinggi dalam sektor Climate Action, Quality Education, dan Responsible Consumption and Production. Namun, analisis ini juga mengungkapkan bahwa Indonesia perlu menekankan upaya lebih lanjut pada sektor-sektor seperti Partnership for The Goals, Life on Land, dan Industry Innovation and Infrastructure, guna mencapai tujuan pembangunan berkelanjutan yang lebih holistik dan inklusif.")
     st.divider()
 
 
