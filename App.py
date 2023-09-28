@@ -81,7 +81,7 @@ with st.sidebar:
      selected
 
 if selected == 'Insight Negara-Negara':
-    st.markdown(f"<h1 style='text-align:center;'>Analisis Sustainable Development Goals pada Negara-Negara 2023</h1>",unsafe_allow_html=True)
+    st.markdown(f"<h1 style='text-align:center;'>Analisis Sustainable Development Goals pada Negara-Negara Tahun 2023</h1>",unsafe_allow_html=True)
 
     st.divider()
     st.header("10 Negara dengan nilai rata-rata aspek SDGs di tahun 2023")
