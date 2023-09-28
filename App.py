@@ -137,8 +137,8 @@ if selected == 'Insight Negara-Negara':
     st.pyplot(plt.gcf())
     high_scoring_goals = goal_means[goal_means >= goal_means.mean()]
     low_scoring_goals = goal_means[goal_means < goal_means.mean()]
-    st.write("✅Secara keseluruhan, sebagian besar negara telah menunjukkan pencapaian yang mengesankan dalam mencapai tujuan-temuan SDG seperti Goal 13 (Climate Action), Goal 12 (Responsible Consumption and Production), dan Goal 4 (Quality Education), dengan rata-rata skor yang menggembirakan.")
-    st.write("✅ Namun, terdapat tantangan yang signifikan dalam pencapaian Goal 14 (Life Below Water), Goal 9 (Industry, Innovation, and Infrastructure), Goal 10 (Reduced Inequalities), dan Goal 2 (Zero Hunger), yang masih mencatat skor rata-rata yang rendah. Hal ini menggambarkan perluasan upaya dan fokus lebih lanjut pada aspek-aspek kunci pembangunan berkelanjutan yang masih memerlukan perhatian serius dan tindakan bersama.")
+    st.write("✅Secara keseluruhan, sebagian besar negara telah menunjukkan pencapaian yang baik dalam mencapai tujuan-temuan SDG seperti Goal 13 (Climate Action), Goal 12 (Responsible Consumption and Production), dan Goal 4 (Quality Education), dengan rata-rata skor di peringkat teratas.")
+    st.write("✅Namun, terdapat tantangan yang signifikan dalam pencapaian Goal 14 (Life Below Water), Goal 9 (Industry, Innovation, and Infrastructure), Goal 10 (Reduced Inequalities), dan Goal 2 (Zero Hunger), yang masih mencatat skor rata-rata yang rendah. Hal ini menunjukan bahwa perluasan upaya dan fokus lebih lanjut pada aspek-aspek kunci pembangunan berkelanjutan yang masih memerlukan perhatian serius dan tindakan bersama.")
     st.divider()
 
     feature_map2 = {
