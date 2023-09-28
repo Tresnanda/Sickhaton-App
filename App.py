@@ -84,7 +84,7 @@ if selected == 'Insight Negara-Negara':
     st.markdown(f"<h1 style='text-align:center;'>Analisis Sustainable Development Goals pada Negara-Negara 2023</h1>",unsafe_allow_html=True)
 
     st.divider()
-    st.header("Negara dengan nilai SDG terbesar di tahun 2023")
+    st.header("10 Negara dengan nilai rata-rata aspek SDGs di tahun 2023")
     
 
     #st.dataframe(df2023)
@@ -92,13 +92,14 @@ if selected == 'Insight Negara-Negara':
     
     sns.set(font_scale=0.75)
     plot_top10 = sns.barplot(data=df2023.sort_values(by="overall_score", ascending=False).head(10), x="country", y="overall_score", width=0.5)
+    plt.xticks(rotation=45)
     st.pyplot(plot_top10.get_figure())
-    st.write ("✅Berdasarkan diagram tersebut, Negara Finlandia menduduki peringkat pertama dengan perolehan rata-rata nilai tertinggi dari seluruh aspek SDGs berdasarkan data dari tahun 2000 sampai 2022.")
-    st.write("✅10 Negara dalam peringkat teratas termasuk kategori wilayah Benua Eropa dengan nilai rata-rata di atas 80% sehingga menunjukan bahwa kawasan tersebut telah melakukan upaya yang cukup maskimal dalam mengejar 17 tujuan SDGs di tahun 2023.")
+    st.write ("✅Berdasarkan diagram tersebut, Negara Finlandia menduduki peringkat pertama dengan perolehan rata-rata nilai tertinggi dari seluruh aspek SDGs berdasarkan data tahun 2023.")
+    st.write("✅10 Negara dalam peringkat teratas termasuk kategori wilayah Benua Eropa dengan nilai rata-rata di atas 80% sehingga menunjukan bahwa kawasan tersebut telah melakukan upaya yang cukup maskimal dalam mengejar 17 tujuan SDGs di tahun 2030.")
     plt.close()
     st.divider()
 
-    st.header("Persebaran Jumlah Negara Berdasarkan Region")
+    st.header("Distribusi Jumlah Negara Berdasarkan Kategori Region")
     #region_counts = df2023.groupby('region')['country'].count().reset_index()
     region_counts = df2023['region'].value_counts().reset_index()
     region_counts.columns = ['region', 'country']
@@ -109,11 +110,11 @@ if selected == 'Insight Negara-Negara':
     plt.xticks(rotation=45)
     st.pyplot(plt.gcf()) 
     plt.close()
-    st.write("Region dengan negara terbanyak adalah Sub-Saharan Africa disusul dengan OECD di posisi kedua")
-
-
+    st.write("✅Berdasarkan diagram batang di atas, Sub-Saharan Africa menjadi kategori region dengan persebaran negara terbanyak dalam data laporan pertumbuhan SDGs tahun 2023.")
+    st.write("✅Sedangkan region Oceania menjadi kategori region dengan persebaran negara paling sedikit dalam data laporan pertumbuhan SDGs tahun 2023.")
+    st.write("✅Region E.Europe & C.Asia dan Region LAC menjadi dua region dengan persamaan jumlah persebaran negara berdasarkan data laporan pertumbuhan SDGs tahun 2023.")
     st.divider()
-    st.header("Perbandingan Rata-Rata Nilai SDG Setiap Region")
+    st.header("Rasio Rata-Rata Nilai Seluruh Aspek SDG dalam Setiap Region")
     plt.figure(figsize=(10, 6))
 
     sns.set(font_scale=1)
@@ -123,8 +124,8 @@ if selected == 'Insight Negara-Negara':
     plt.xticks(rotation=45)
     st.pyplot(plt.gcf())
     plt.close()
-    st.write("Negara-negara yang termasuk dalam OECD(Economic Co-operation and Development) memiliki rata-rata skor SDG lebih besar dibandingkan dengan region lainnya, sedangkan region Sub-Saharan Africa memiliki rata-rata skor paling rendah. Finland yang merupakan negara dengan skor SDG tertinggi termasuk dalam OECD")
-    st.write("Walaupun region Sub-Saharan Africa memiliki jumlah negara paling banyak tetapi rata-rata skornya terendah, sedangkan OEDC dengan jumlah negara terbanyak kedua memiliki skor rata-rata SDG tertinggi. Hal ini berarti negara-negara yang termasuk kedalam OEDC mengeluarkan usaha yang sangat bagus dalam mencapai tujuan SDG")
+    st.write("✅Negara-negara yang tergabung dalam Organisasi Kerja Sama dan Pembangunan Ekonomi (OECD) menunjukkan pencapaian rata-rata yang jauh lebih tinggi dalam mencapai Indeks Pembangunan Berkelanjutan (Sustainable Development Goals - SDG) dibandingkan dengan wilayah-wilayah lain di seluruh dunia. Di sisi lain, wilayah Sub-Saharan Africa, dengan rata-rata skor SDG yang paling rendah, menjadi fokus perhatian dalam upaya menuju pencapaian tujuan-tujuan pembangunan berkelanjutan. Sebagai contoh, Finlandia, yang menonjol sebagai negara dengan skor SDG tertinggi, merupakan salah satu anggota terkemuka dalam kelompok OECD ini.")
+    st.write("✅Meskipun Sub-Saharan Africa memiliki jumlah negara terbanyak, rata-rata skor Indeks Pembangunan Berkelanjutan (SDG) di wilayah ini adalah paling rendah. Di sisi lain, Region OECD dengan jumlah negara peringkat kedua terbanyak berhasil mencatat rata-rata skor SDG tertinggi. Hal ini mencerminkan komitmen yang kuat dari negara-negara OECD dalam mencapai tujuan SDG.")
     st.divider()
 
     goal_means = df2023[[f"goal_{i}_score" for i in range(1, 18)]].mean()
@@ -136,10 +137,9 @@ if selected == 'Insight Negara-Negara':
     st.pyplot(plt.gcf())
     high_scoring_goals = goal_means[goal_means >= goal_means.mean()]
     low_scoring_goals = goal_means[goal_means < goal_means.mean()]
-    st.write("Secara rata-rata, kebanyakan negara sangat bagus skornya dalam goal 13, 12 4 yaitu Climate Action, Responsible Consumption and Production, dan Quality Education. Namun skor rata-rata dari goal 14, 9, 10, 2 yaitu Life Below Water, Industry Innovation and Infrastructure, Reduced Inequalities, dan Zero Hunger masih sangat rendah")
-
+    st.write("✅Secara keseluruhan, sebagian besar negara telah menunjukkan pencapaian yang mengesankan dalam mencapai tujuan-temuan SDG seperti Goal 13 (Climate Action), Goal 12 (Responsible Consumption and Production), dan Goal 4 (Quality Education), dengan rata-rata skor yang menggembirakan.")
+    st.write("✅ Namun, terdapat tantangan yang signifikan dalam pencapaian Goal 14 (Life Below Water), Goal 9 (Industry, Innovation, and Infrastructure), Goal 10 (Reduced Inequalities), dan Goal 2 (Zero Hunger), yang masih mencatat skor rata-rata yang rendah. Hal ini menggambarkan perluasan upaya dan fokus lebih lanjut pada aspek-aspek kunci pembangunan berkelanjutan yang masih memerlukan perhatian serius dan tindakan bersama.")
     st.divider()
-    
 
     feature_map2 = {
         'Skor Rata-Rata': 'overall_score',
