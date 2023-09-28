@@ -257,7 +257,7 @@ elif selected == 'Insight Indonesia':
     plt.xticks(rotation=45)
     st.pyplot(plt.gcf())
 
-    st.write("Jika diurutkan menurut skor terbesar maka akan menjadi")
+    st.write("Jika diurutkan berdasarkan skor aspek SDG terbesar maka akan menjadi sebagai berikut.")
     indonesia_kolumsort = [f'goal_{i}_score' for i in range(1,18)]
     skor = indonesia[indonesia_kolumsort].mean().sort_values(ascending=False)
     plt.figure(figsize=(12, 6))
@@ -312,7 +312,7 @@ elif selected == 'Insight Indonesia':
     st.pyplot(plt.gcf())
     plt.close()
     st.write("✅Melalui analisis linechart mengenai skor SDG Indonesia dari tahun ke tahun, dapat disimpulkan bahwa secara rata-rata, nilai SDG di Indonesia mengalami perkembangan yang terbatas hingga tahun 2012. Setelah tahun 2012, terlihat peningkatan skor yang lebih signifikan.")
-    st.write("✅dalam aspek No Poverty, terdapat perkembangan pesat mulai tahun 2010. Sebelumnya, skor No Poverty berada di kisaran 60, namun mulai tahun 2010, skornya terus meningkat hingga melebihi angka 80.")
+    st.write("✅Dalam aspek No Poverty, terdapat perkembangan pesat mulai tahun 2010. Sebelumnya, skor No Poverty berada di kisaran 60, namun mulai tahun 2010, skornya terus meningkat hingga melebihi angka 80.")
     st.write("✅Skor dalam aspek Reduced Inequalities mengalami penurunan yang signifikan, terutama pada tahun 2010-2011, yang mengakibatkan penurunan dari sekitar 90 menjadi sekitar 60. Ini menandakan perlunya perbaikan segera dalam upaya mengurangi ketidaksetaraan.")
     st.write("✅Selain itu, aspek Life on Land juga memerlukan perhatian lebih lanjut. Dalam rentang tahun 2000 hingga 2022, terjadi sedikit perubahan dan skor yang rendah yakni sekitar 40. Oleh karena itu, perlu upaya lebih besar untuk menjaga dan memulihkan ekosistem daratan.")
     st.write("✅Secara keseluruhan, banyak tujuan SDG di Indonesia yang masih memerlukan usaha lebih lanjut dari pemerintah, terlihat dari grafik yang cenderung datar pada setiap aspek SDG.")
