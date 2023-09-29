@@ -114,7 +114,7 @@ if selected == 'Insight Negara-Negara':
     plt.xticks(rotation=45)
     st.pyplot(plot_top10.get_figure())
     st.write ("✅Berdasarkan diagram tersebut, Negara South Sudan menempati posisi pertama dengan perolehan rata-rata nilai terendah dari seluruh aspek SDGs berdasarkan data tahun 2023.")
-    st.write("✅10 Negara pada peringkat tersebut diklasifikasikan menjadi 8 negara yang termasuk kawasan benua Afrika meliputi South Sudan, Central African Republic, Chad, Yemen Rep, Niger, Sudan, Congo, dan Liberia. Sia 2 Negara yakni Somalia dan Afganistan termasuk kawasan benua Asia. Dua kawasan benua tersebut memiliki skor di bawah 50, sehingga wajib dilakukan upaya dalam meningkatkan skor pencapaian 17 Aspek SDGs di tahun berikutnya.")
+    st.write("✅10 Negara pada peringkat tersebut diklasifikasikan menjadi 8 negara yang termasuk kawasan benua Afrika meliputi South Sudan, Central African Republic, Chad, Somalia, Niger, Sudan, Congo, dan Liberia. Sisa 2 Negara yakni Yemen Rep dan Afganistan termasuk kawasan benua Asia. Dua kawasan benua tersebut memiliki skor di bawah 50, sehingga wajib dilakukan upaya dalam meningkatkan skor pencapaian 17 Aspek SDGs di tahun berikutnya.")
     plt.close()
     st.divider()
 
