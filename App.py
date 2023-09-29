@@ -180,7 +180,7 @@ if selected == 'Insight Negara-Negara':
         'Peace, Justice, and Strong Institutions': 'goal_16_score',
         'Partnership for The Goals': 'goal_17_score'
     }
-    st.header("Perkembangan Skor SDG dari Tahun 2022 - 2022")
+    st.header("Perkembangan Skor SDG dari Tahun 2000 - 2022")
     pilihan = st.selectbox('Pilih Jenis Skor', list(feature_map2.keys()), key='select-type', index=0)
     kolom_pilihan = feature_map2[pilihan]
     rata_pil = df2000.groupby('year')[kolom_pilihan].mean().reset_index()
@@ -194,24 +194,43 @@ if selected == 'Insight Negara-Negara':
     #plt.ylim(30, 90)
     st.pyplot(plt.gcf())
     plt.close()
-    st.write("✅Berdasarkan grafik skor rata-rata dari seluruh aspek SDG pada periode tahun 2000 sampai 2022 menunjukan bahwa terjadi pertumbuhan yang terus naik dengan konsisten di setiap tahunnya sehingga menggambarkan peningkatan usaha yang dilakukan oleh negara-negara dalam mengejar target SDGs 2030.")
-    st.write("✅Pada Aspek Tujuan SDG (No Poverty) tidak mengalami peningkatan yang signifikan pada tahun 2000 sampai 2010, namun terjadi peningkatan yang sangat tajam dari tahun 2010 sampai 2019 yang mengindikasikan penurunan angka kemiskinan, kemudian terjadi penurunan skor pada periode 2019-2020 akibat pandemi covid-19 sehingga menyebabkan meningkatnya angka kemiskinan, akan tetapi pada periode 2019-2022 terjadi pemulihan tingkat kemiskinan yang ditandai oleh meningkatnya skor.") 
-    st.write("✅Pada Aspek Tujuan Zero Hunger, terjadi ketidakkonsistenan perkembangan skor pada beberapa periode tahun, sehingga memerlukan perluasan upaya yang untuk meningkatkan stabilitas skor dalam pencapaian tujuan SDG ini pada tahun berikutnya.")
-    st.write("✅Grafik Good Health and Well Being menunjukan peningkatan yang stabil dari tahun 2000 sampai tahun 2019, namun terjadi sedikit penurunan skor pada periode 2019-2022 hal itu disebabkan oleh Pandemi Covid-19 yang memengaruhi tingkat kesehatan manusia sehingga berdampak pada penurunan kualitas Kehidupan Sehat dan Sejahtera.")
-    st.write("✅Grafik Quality Education mengalami kenaikan secara konsisten pada periode 2000-2020, namun terjadi sedikit penurunan kualitas pendidikan pada periode 2020-2022 hal itu menunjukan perlu ada perbaikan kualitas pendidikan pada tahun berikutnya.")
-    st.write("✅Aspek Gender Quality menunjukan grafik yang stabil naik dari periode tahun 2000-2022 mencerminkan kemajuan yang berkelanjutan dalam upaya mencapai kesetaraan gender.")
-    st.write("✅Aspek Clean Water and Sanitation menunjukan pertumbuhan skor yang meningkat konsisten dari tahun 2000 sampai tahun 2020, namun terjadi sedikit penurunan skor dari tahun 2020-2022 sehingga perlu upaya pemeliharaan dan pemantauan berkelanjutan dalam menjaga akses air bersih dan sanitasi yang baik untuk meningkatkan kembali skor pada tahun berikutnya.")
-    st.write("✅Aspek Affordable and Clean Energy mengalami peningkatan skor yang konsisten dari tahun 2000 hingga 2020, mencerminkan langkah-langkah positif dalam pengembangan sumber energi yang bersih dan terjangkau. Namun, terjadinya sedikit penurunan pada periode 2020-2022 menunjukkan perlunya pemantauan dan adaptasi terhadap dinamika perubahan dalam sektor energi global, yang dapat memengaruhi aksesibilitas dan keberlanjutan sumber energi bersih di tahun berikutnya.")
-    st.write("✅Grafik Decent Work and Economic Growth menunjukkan perkembangan skor yang tidak stabil dari beberapa periode, dengan fluktuasi antara peningkatan dan penurunan. Hal ini mungkin mencerminkan tantangan kompleks yang dihadapi dalam mencapai pertumbuhan ekonomi yang inklusif dan menciptakan lapangan kerja yang layak.")
-    st.write("✅Grafik Industry, Innovation and Infrastructure menunjukan peningkatan skor yang cenderung naik dan konsisten pada periode tahun 2000-2022, Hal ini mencerminkan upaya yang berhasil dalam mengembangkan sektor industri, inovasi, dan infrastruktur, yang memiliki dampak positif pada pertumbuhan ekonomi dan perkembangan berkelanjutan.")
-    st.write("✅Grafik Aspek Reduced Inequalities mengalami sedikit penurunan skor pada periode 2003-2004 dan kemudian cenderung mengalami kenaikan skor saat periode 2004-2020, dan kembali mengalami penurunan skor dalam jumlah sedikit, sehingga perlu diimprove kembali pada tahun berikutnya.")
-    st.write("✅Grafik Sustainable Cities and Communities menunjukkan ketidakstabilan perkembangan skor dari tahun 2000 hingga 2022, dengan adanya fluktuasi yang mencakup peningkatan dan penurunan skor sehingga perlu tindakan untuk menstabilkan dan meningkatkan skor di tahun berikutnya.")
-    st.write("✅Aspek Responsible Consumption and Production menggambarkan ketidakstabilan perkembangan skor yang ditandai dengan peningkatan dan penurunan dengan selisih dan jangka waktu yang tidak konsisten, sehingga perlu dilakukan upaya yang dapat menstabilkan pertumbuhan skor di tahun berikutnya.")
-    st.write("✅Aspek Climate Action mengalami fluktuasi skor dari tahun 2000 hingga 2022, dengan peningkatan dan penurunan yang tidak stabil, mencerminkan tantangan yang kompleks dalam mencapai tujuan aksi iklim yang konsisten.")
-    st.write("✅Aspek Life Below Water cenderung mengalami peningkatan skor, dengan hanya satu penurunan skor yang tercatat.")
-    st.write("✅Aspek Life on Land menunjukan grafik yang cenderung meningkat dari tahun 2001-2017, dan hanya terjadi dua kali penurunan skor.")
-    st.write("✅Grafik Peace, Justice, and Strong Institutions menggambarkan adanya penurunan skor sebanyak empat kali pada periode tahun yang berbeda.")
-    st.write("✅Grafik dari Partnership for The Goals menggambarkan pertumbuhan grafik yang naik secara perlahan, namun terjadi penurunan skor sebanyak dua kali pada jarak dan rentang waktu yang berbeda.")
+    if feature_map2[pilihan] == 'overall_score':
+        st.write("✅Berdasarkan grafik skor rata-rata dari seluruh aspek SDG pada periode tahun 2000 sampai 2022 menunjukan bahwa terjadi pertumbuhan yang terus naik dengan konsisten di setiap tahunnya sehingga menggambarkan peningkatan usaha yang dilakukan oleh negara-negara dalam mengejar target SDGs 2030.")
+    elif feature_map2[pilihan] == 'goal_1_score':
+        st.write("✅Pada Aspek Tujuan SDG (No Poverty) tidak mengalami peningkatan yang signifikan pada tahun 2000 sampai 2010, namun terjadi peningkatan yang sangat tajam dari tahun 2010 sampai 2019 yang mengindikasikan penurunan angka kemiskinan, kemudian terjadi penurunan skor pada periode 2019-2020 akibat pandemi covid-19 sehingga menyebabkan meningkatnya angka kemiskinan, akan tetapi pada periode 2019-2022 terjadi pemulihan tingkat kemiskinan yang ditandai oleh meningkatnya skor.") 
+    elif feature_map2[pilihan] == 'goal_2_score':
+        st.write("✅Pada Aspek Tujuan Zero Hunger, terjadi ketidakkonsistenan perkembangan skor pada beberapa periode tahun, sehingga memerlukan perluasan upaya yang untuk meningkatkan stabilitas skor dalam pencapaian tujuan SDG ini pada tahun berikutnya.")
+    elif feature_map2[pilihan] == 'goal_3_score':
+        st.write("✅Grafik Good Health and Well Being menunjukan peningkatan yang stabil dari tahun 2000 sampai tahun 2019, namun terjadi sedikit penurunan skor pada periode 2019-2022 hal itu disebabkan oleh Pandemi Covid-19 yang memengaruhi tingkat kesehatan manusia sehingga berdampak pada penurunan kualitas Kehidupan Sehat dan Sejahtera.")
+    elif feature_map2[pilihan] == 'goal_4_score':
+        st.write("✅Grafik Quality Education mengalami kenaikan secara konsisten pada periode 2000-2020, namun terjadi sedikit penurunan kualitas pendidikan pada periode 2020-2022 hal itu menunjukan perlu ada perbaikan kualitas pendidikan pada tahun berikutnya.")
+    elif feature_map2[pilihan] == 'goal_5_score':
+        st.write("✅Aspek Gender Quality menunjukan grafik yang stabil naik dari periode tahun 2000-2022 mencerminkan kemajuan yang berkelanjutan dalam upaya mencapai kesetaraan gender.")
+    elif feature_map2[pilihan] == 'goal_6_score':
+        st.write("✅Aspek Clean Water and Sanitation menunjukan pertumbuhan skor yang meningkat konsisten dari tahun 2000 sampai tahun 2020, namun terjadi sedikit penurunan skor dari tahun 2020-2022 sehingga perlu upaya pemeliharaan dan pemantauan berkelanjutan dalam menjaga akses air bersih dan sanitasi yang baik untuk meningkatkan kembali skor pada tahun berikutnya.")
+    elif feature_map2[pilihan] == 'goal_7_score':
+        st.write("✅Aspek Affordable and Clean Energy mengalami peningkatan skor yang konsisten dari tahun 2000 hingga 2020, mencerminkan langkah-langkah positif dalam pengembangan sumber energi yang bersih dan terjangkau. Namun, terjadinya sedikit penurunan pada periode 2020-2022 menunjukkan perlunya pemantauan dan adaptasi terhadap dinamika perubahan dalam sektor energi global, yang dapat memengaruhi aksesibilitas dan keberlanjutan sumber energi bersih di tahun berikutnya.")
+    elif feature_map2[pilihan] == 'goal_8_score':
+        st.write("✅Grafik Decent Work and Economic Growth menunjukkan perkembangan skor yang tidak stabil dari beberapa periode, dengan fluktuasi antara peningkatan dan penurunan. Hal ini mungkin mencerminkan tantangan kompleks yang dihadapi dalam mencapai pertumbuhan ekonomi yang inklusif dan menciptakan lapangan kerja yang layak.")
+    elif feature_map2[pilihan] == 'goal_9_score':
+        st.write("✅Grafik Industry, Innovation and Infrastructure menunjukan peningkatan skor yang cenderung naik dan konsisten pada periode tahun 2000-2022, Hal ini mencerminkan upaya yang berhasil dalam mengembangkan sektor industri, inovasi, dan infrastruktur, yang memiliki dampak positif pada pertumbuhan ekonomi dan perkembangan berkelanjutan.")
+    elif feature_map2[pilihan] == 'goal_10_score':
+        st.write("✅Grafik Aspek Reduced Inequalities mengalami sedikit penurunan skor pada periode 2003-2004 dan kemudian cenderung mengalami kenaikan skor saat periode 2004-2020, dan kembali mengalami penurunan skor dalam jumlah sedikit, sehingga perlu diimprove kembali pada tahun berikutnya.")
+    elif feature_map2[pilihan] == 'goal_11_score':
+        st.write("✅Grafik Sustainable Cities and Communities menunjukkan ketidakstabilan perkembangan skor dari tahun 2000 hingga 2022, dengan adanya fluktuasi yang mencakup peningkatan dan penurunan skor sehingga perlu tindakan untuk menstabilkan dan meningkatkan skor di tahun berikutnya.")
+    elif feature_map2[pilihan] == 'goal_12_score':
+        st.write("✅Aspek Responsible Consumption and Production menggambarkan ketidakstabilan perkembangan skor yang ditandai dengan peningkatan dan penurunan dengan selisih dan jangka waktu yang tidak konsisten, sehingga perlu dilakukan upaya yang dapat menstabilkan pertumbuhan skor di tahun berikutnya.")
+    elif feature_map2[pilihan] == 'goal_13_score':
+        st.write("✅Aspek Climate Action mengalami fluktuasi skor dari tahun 2000 hingga 2022, dengan peningkatan dan penurunan yang tidak stabil, mencerminkan tantangan yang kompleks dalam mencapai tujuan aksi iklim yang konsisten.")
+    elif feature_map2[pilihan] == 'goal_14_score':
+        st.write("✅Aspek Life Below Water cenderung mengalami peningkatan skor, dengan hanya satu penurunan skor yang tercatat.")
+    elif feature_map2[pilihan] == 'goal_15_score':
+        st.write("✅Aspek Life on Land menunjukan grafik yang cenderung meningkat dari tahun 2001-2017, dan hanya terjadi dua kali penurunan skor.")
+    elif feature_map2[pilihan] == 'goal_16_score':
+        st.write("✅Grafik Peace, Justice, and Strong Institutions menggambarkan adanya penurunan skor sebanyak empat kali pada periode tahun yang berbeda.")
+    elif feature_map2[pilihan] == 'goal_17_score':
+        st.write("✅Grafik dari Partnership for The Goals menggambarkan pertumbuhan grafik yang naik secara perlahan, namun terjadi penurunan skor sebanyak dua kali pada jarak dan rentang waktu yang berbeda.")
+    
     st.write("✅Terlihat pola serupa pada semua aspek SDG, yaitu usaha yang dilakukan mulai tahun 2020 cenderung berkurang dibandingkan dengan tahun-tahun sebelumnya. Ini tercermin dalam grafik skor yang cenderung mendatar sejak tahun 2020.")
              
 
@@ -257,7 +276,7 @@ if selected == 'Insight Negara-Negara':
     high_correlation_pairs = [(feature_map.get(pair[0], pair[0]), feature_map.get(pair[1], pair[1]), matrix_corr.loc[pair[0], pair[1]]) for pair in high_correlation_pairs]
     st.write("✅Melalui analisis heatmap, ditemukan fakta terkait skor-skor tujuan SDG, yaitu terdapat hubungan korelasi yang unik, baik positif maupun negatif, antara beberapa skor. Berikut adalah korelasi skor-skor SDG.")
     if high_correlation_pairs:
-        st.subheader("Pasangan dengan korelasi tinggi (>|0.7|):")
+        st.subheader("Pasangan dengan korelasi tinggi (|skor korelasi|>0.7):")
         for pair in high_correlation_pairs:
             st.write(f"{pair[0]} dengan {pair[1]}: {pair[2]:.2f}")
     else:
