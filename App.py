@@ -113,8 +113,8 @@ if selected == 'Insight Negara-Negara':
     plot_top10 = sns.barplot(data=df2023.sort_values(by="overall_score", ascending=True).head(10), x="country", y="overall_score", width=0.5)
     plt.xticks(rotation=45)
     st.pyplot(plot_top10.get_figure())
-    st.write ("✅Berdasarkan diagram tersebut, Negara Finlandia menduduki peringkat pertama dengan perolehan rata-rata nilai tertinggi dari seluruh aspek SDGs berdasarkan data tahun 2023.")
-    st.write("✅10 Negara dalam peringkat teratas termasuk kategori wilayah Benua Eropa dengan nilai rata-rata di atas 80% sehingga menunjukan bahwa kawasan tersebut telah melakukan upaya dalam mengejar 17 tujuan SDGs di tahun 2030.")
+    st.write ("✅Berdasarkan diagram tersebut, Negara South Sudan menempati posisi pertama dengan perolehan rata-rata nilai terendah dari seluruh aspek SDGs berdasarkan data tahun 2023.")
+    st.write("✅")
     plt.close()
     st.divider()
 
