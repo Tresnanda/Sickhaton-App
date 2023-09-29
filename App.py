@@ -334,12 +334,12 @@ def add_bg_from_url():
 
 add_bg_from_url()
 
-# Menampilkan footer
 st.markdown(
     """
-    --- 
-    Source of dataset: [Sustainable Development Report Dataset](https://www.kaggle.com/datasets/sazidthe1/sustainable-development-report)
-    
-    Made with ❤️ by PisangGorengRaja Team. 
-    """
+    <div style="font-size: 12px; position: fixed; bottom: 10px; left: 10px;">
+        Source of dataset: <a href="https://www.kaggle.com/datasets/sazidthe1/sustainable-development-report">Sustainable Development Report Dataset</a>
+        Made with ❤️ by PisangGorengRaja Team.  
+    </div>
+    """,
+    unsafe_allow_html=True
 )
