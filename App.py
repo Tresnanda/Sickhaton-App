@@ -336,9 +336,8 @@ add_bg_from_url()
 
 st.markdown(
     """
-    ---  
+    ---
+    Made with ❤️ by PisangGorengRaja Team.  
     Source of dataset: [Sustainable Development Report Dataset](https://www.kaggle.com/datasets/sazidthe1/sustainable-development-report)
-    
-    Made with ❤️ by PisangGorengRaja Team.
     """
 )
