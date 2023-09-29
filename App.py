@@ -5,6 +5,7 @@ import numpy as np
 from streamlit.connections import SQLConnection
 import seaborn as sns
 from streamlit_option_menu import option_menu
+import pickle
 
 #conn = st.experimental_connection('sdg_db', type="sql")
 query2023 = "SELECT * FROM sdg_2023"
@@ -14,6 +15,9 @@ query2000 = "SELECT * FROM sdg_2000"
 conn: SQLConnection = st.experimental_connection('sdg_db', type='sql')
 df2023: pd.DataFrame = conn.query(query2023)
 df2000: pd.DataFrame = conn.query(query2000)
+
+with open('model/model_new.pkl', 'rb') as model_file:
+    model = pickle.load(model_file)
 # @st.cache_resource
 # def get_data_from_db(query):
 #     df: pd.DataFrame = conn.query(query)
@@ -77,7 +81,7 @@ df2000[ubah] = df2000[ubah].apply(pd.to_numeric, errors='coerce').fillna(0).asty
 
 
 with st.sidebar:
-     selected = option_menu("Insight Skor SDG", ['Insight Negara-Negara', 'Insight Indonesia'], icons=['bar-chart-fill', 'bar-chart-fill'], default_index=1)
+     selected = option_menu("Insight Skor SDG", ['Insight Negara-Negara', 'Insight Indonesia', 'Prediksi Skor SDG'], icons=['bar-chart-fill', 'bar-chart-fill', 'bar-chart-fill'], default_index=1)
      selected
 
 if selected == 'Insight Negara-Negara':
@@ -344,3 +348,57 @@ st.markdown(
 )
 
 
+elif selected == 'Prediksi Skor SDG':
+    country_names = ['Afghanistan', 'Albania', 'Algeria', 'Angola', 'Argentina',
+       'Armenia', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas, The',
+       'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium',
+       'Belize', 'Benin', 'Bhutan', 'Bolivia', 'Bosnia and Herzegovina',
+       'Botswana', 'Brazil', 'Brunei Darussalam', 'Bulgaria',
+       'Burkina Faso', 'Burundi', 'Cabo Verde', 'Cambodia', 'Cameroon',
+       'Canada', 'Central African Republic', 'Chad', 'Chile', 'China',
+       'Colombia', 'Comoros', 'Congo, Dem. Rep.', 'Congo, Rep.',
+       'Costa Rica', "Cote d'Ivoire", 'Croatia', 'Cuba', 'Cyprus',
+       'Czechia', 'Denmark', 'Djibouti', 'Dominican Republic',
+       'East and South Asia', 'Eastern Europe and Central Asia',
+       'Ecuador', 'Egypt, Arab Rep.', 'El Salvador', 'Estonia',
+       'Eswatini', 'Ethiopia', 'Fiji', 'Finland', 'France', 'Gabon',
+       'Gambia, The', 'Georgia', 'Germany', 'Ghana', 'Greece',
+       'Guatemala', 'Guinea', 'Guyana', 'Haiti', 'High-income Countries',
+       'Honduras', 'Hungary', 'Iceland', 'India', 'Indonesia',
+       'Iran, Islamic Rep.', 'Iraq', 'Ireland', 'Israel', 'Italy',
+       'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Korea, Rep.',
+       'Kuwait', 'Kyrgyz Republic', 'Lao PDR',
+       'Latin America and the Caribbean', 'Latvia', 'Lebanon', 'Lesotho',
+       'Liberia', 'Lithuania', 'Lower & Lower-middle Income',
+       'Lower-middle-income Countries', 'Low-income Countries',
+       'Luxembourg', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives',
+       'Mali', 'Malta', 'Mauritania', 'Mauritius', 'Mexico',
+       'Middle East and North Africa', 'Moldova', 'Mongolia',
+       'Montenegro', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia',
+       'Nepal', 'Netherlands', 'New Zealand', 'Nicaragua', 'Niger',
+       'Nigeria', 'North Macedonia', 'Norway', 'Oceania', 'OECD members',
+       'Oman', 'Pakistan', 'Panama', 'Papua New Guinea', 'Paraguay',
+       'Peru', 'Philippines', 'Poland', 'Portugal', 'Qatar', 'Romania',
+       'Russian Federation', 'Rwanda', 'Sao Tome and Principe',
+       'Saudi Arabia', 'Senegal', 'Serbia', 'Sierra Leone', 'Singapore',
+       'Slovak Republic', 'Slovenia', 'Small Island Developing States',
+       'Somalia', 'South Africa', 'South Sudan', 'Spain', 'Sri Lanka',
+       'Sub-Saharan Africa', 'Sudan', 'Suriname', 'Sweden', 'Switzerland',
+       'Syrian Arab Republic', 'Tajikistan', 'Tanzania', 'Thailand',
+       'Togo', 'Trinidad and Tobago', 'Tunisia', 'Türkiye',
+       'Turkmenistan', 'Uganda', 'Ukraine', 'United Arab Emirates',
+       'United Kingdom', 'United States', 'Upper-middle-income Countries',
+       'Uruguay', 'Uzbekistan', 'Venezuela, RB', 'Vietnam', 'World',
+       'Yemen, Rep.', 'Zambia', 'Zimbabwe']
+    import json
+    with open('dataset/country_mapping.json', 'r') as json_file:
+        country_mapping = json.load(json_file)
+    st.markdown(f"<h1 style='text-align:center;'>Prediksi Skor SDG di Tahun 2030</h1>",unsafe_allow_html=True)
+    st.divider()
+    negara = st.selectbox('Pilih Negara', list(country_mapping.keys()), key='select-type3', index=0)
+    selected_negara = country_mapping[negara]
+    predict_input = [[selected_negara, 2030]]
+
+    predict = model.predict(predict_input)
+    st.write(f"Skor SDG untuk Negara {negara} di tahun 2030 adalah {predict[0]}")
+    
