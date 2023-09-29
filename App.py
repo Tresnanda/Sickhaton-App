@@ -336,16 +336,9 @@ add_bg_from_url()
 
 st.markdown(
     """
-    <style>
-    .footer {
-        font-size: 10px;
-    }
-    </style>
-    <div class="footer">
     ---
-    Made with ❤️ by PisangGorengRaja Team.  
-    Source of dataset: <a href="https://www.kaggle.com/datasets/sazidthe1/sustainable-development-report">Sustainable Development Report Dataset</a>
-    </div>
+    <p style='font-size:14px;'>Made with ❤️ by PisangGorengRaja Team.<br>
+    Source of dataset: <a href='https://www.kaggle.com/datasets/sazidthe1/sustainable-development-report' target='_blank'>Sustainable Development Report Dataset</a></p>
     """,
     unsafe_allow_html=True
 )
