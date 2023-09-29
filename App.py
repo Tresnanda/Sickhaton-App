@@ -109,7 +109,7 @@ if selected == 'Insight Negara-Negara':
     #st.dataframe(df2023)
     #df2023[['overall_score', 'goal_1_score', 'goal_2_score', 'goal_3_score', 'goal_4_score', 'goal_5_score', 'goal_6_score', 'goal_7_score', 'goal_8_score', 'goal_9_score', 'goal_10_score','goal_11_score', 'goal_12_score', 'goal_13_score', 'goal_14_score', 'goal_15_score', 'goal_16_score', 'goal_17_score']] = pd.to_numeric(df2023[['overall_score', 'goal_1_score', 'goal_2_score', 'goal_3_score', 'goal_4_score', 'goal_5_score', 'goal_6_score', 'goal_7_score', 'goal_8_score', 'goal_9_score', 'goal_10_score','goal_11_score', 'goal_12_score', 'goal_13_score', 'goal_14_score', 'goal_15_score', 'goal_16_score', 'goal_17_score']], errors='coerce').fillna(0).astype(int)
     
-    sns.set(font_scale=0.65)
+    sns.set(font_scale=0.50)
     plot_top10 = sns.barplot(data=df2023.sort_values(by="overall_score", ascending=True).head(10), x="country", y="overall_score", width=0.5)
     plt.xticks(rotation=45)
     st.pyplot(plot_top10.get_figure())
