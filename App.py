@@ -317,3 +317,20 @@ elif selected == 'Insight Indonesia':
     st.write("✅Selain itu, aspek Life on Land juga memerlukan perhatian lebih lanjut. Dalam rentang tahun 2000 hingga 2022, terjadi sedikit perubahan dan skor yang rendah yakni sekitar 40. Oleh karena itu, perlu upaya lebih besar untuk menjaga dan memulihkan ekosistem daratan.")
     st.write("✅Secara keseluruhan, banyak tujuan SDG di Indonesia yang masih memerlukan usaha lebih lanjut dari pemerintah, terlihat dari grafik yang cenderung datar pada setiap aspek SDG.")
 
+#background
+def add_bg_from_url():
+    st.markdown(
+         f"""
+         <style>
+         .stApp {{
+             background-image: url("https://images.unsplash.com/photo-1483401757487-2ced3fa77952?ixlib=rb-4.0.3");
+             background-attachment: fixed;
+             background-size: cover;
+         }}
+         </style>
+         """,
+         unsafe_allow_html=True
+     )
+
+add_bg_from_url()
+
