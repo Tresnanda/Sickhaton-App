@@ -164,7 +164,7 @@ if menu_option == "English":
         st.divider()
 
         feature_map2 = {
-            'Skor Rata-Rata': 'overall_score',
+            'Average score': 'overall_score',
             'No Poverty': 'goal_1_score',
             'Zero Hunger': 'goal_2_score',
             'Good Health and Well Being': 'goal_3_score',
@@ -289,6 +289,7 @@ if menu_option == "English":
         # Menambahkan pilihan tahun untuk data tahun 2023 dan 2000-2022
         tahun_option = st.selectbox("Select SDG score data period", ["2023", "2000-2022"])
         tahun = None
+        #scores = indonesia_data['overall_score']
 
         # Memilih dataset berdasarkan tahun yang dipilih
         if tahun_option == "2023":
@@ -301,18 +302,20 @@ if menu_option == "English":
         st.subheader("SDGs Score Comparison between Two Countries")
         negara1 = st.selectbox("Select Country First:", df['country'].unique())
         negara2 = st.selectbox("Select Second Country:", df['country'].unique())
-        jenis = st.selectbox("Select SDG Aspect:", ['goal_1_score', 'goal_2_score', 'goal_3_score', 'goal_4_score', 'goal_5_score', 'goal_6_score', 'goal_7_score', 'goal_8_score', 'goal_9_score', 'goal_10_score', 'goal_11_score', 'goal_12_score', 'goal_13_score', 'goal_14_score', 'goal_15_score', 'goal_16_score', 'goal_17_score'])
+
+        scores = st.selectbox("Select SDG Aspect:", list(feature_map2.keys()), key='select-type2', index=0)
+        selected_column = feature_map2[scores]
 
         skor_negara1 = df[(df['country'] == negara1)]
         skor_negara2 = df[(df['country'] == negara2)]
 
         if not skor_negara1.empty and not skor_negara2.empty:
-            skor1 = skor_negara1[jenis].values[0]
-            skor2 = skor_negara2[jenis].values[0]
+            skor1 = skor_negara1[selected_column].values[0]
+            skor2 = skor_negara2[selected_column].values[0]
 
             # Menampilkan hasil perbandingan skor
-            st.write(f"Score {jenis} in {tahun} for {negara1}: {skor1}")
-            st.write(f"Score {jenis} in {tahun} for {negara2}: {skor2}")
+            st.write(f"Score {selected_column} in {tahun} for {negara1}: {skor1}")
+            st.write(f"Score {selected_column} in {tahun} for {negara2}: {skor2}")
 
             # Membuat plot perbandingan skor
             plt.figure(figsize=(6, 6))
@@ -322,9 +325,9 @@ if menu_option == "English":
             plt.bar(r1, [skor1], color='b', width=bar_width, edgecolor='grey', label=negara1)
             plt.bar(r2, [skor2], color='orange', width=bar_width, edgecolor='grey', label=negara2)
             plt.xlabel('Country', fontweight='bold')
-            plt.ylabel(f'Score {jenis}', fontweight='bold')
+            plt.ylabel(f'Score {selected_column}', fontweight='bold')
             plt.xticks([r + bar_width / 2 for r in r1 + r2], [negara1, negara2])
-            plt.title(f'Score Comparison {jenis} between {negara1}, {negara2} ({tahun})')
+            plt.title(f'Score Comparison {selected_column} between {negara1}, {negara2} ({tahun})')
             plt.legend()
             plt.show()
             st.pyplot(plt.gcf())
@@ -363,7 +366,7 @@ if menu_option == "English":
 
         #scores = indonesia_data['overall_score']
         feature_map2 = {
-            'average scores': 'overall_score',
+            'Average scores': 'overall_score',
             'No Poverty': 'goal_1_score',
             'Zero Hunger': 'goal_2_score',
             'Good Health and Well Being': 'goal_3_score',
@@ -397,11 +400,43 @@ if menu_option == "English":
         plt.ylim(0, 100)
         st.pyplot(plt.gcf())
         plt.close()
-        st.write("✅Through a linechart analysis of Indonesia's SDG scores from year to year, it can be concluded that on average, Indonesia's SDG scores experienced limited progress until 2012. After 2012, there was a more significant increase in scores.")
-        st.write("✅In the No Poverty aspect, there was a rapid development starting in 2010. Previously, the No Poverty score was around 60, but starting in 2010, the score steadily increased to over 80.")
-        st.write("✅The score in the Reduced Inequalities aspect experienced a significant decline, especially in 2010-2011, resulting in a drop from around 90 to around 60. This signals the need for immediate improvement in efforts to reduce inequalities.")
-        st.write("✅In addition, the Life on Land aspect also requires further attention. Between 2000 and 2022, there was little change and a low score of around 40. Therefore, greater efforts are needed to maintain and restore the terrestrial ecosystem.")
-        st.write("✅Overall, many of the SDG goals in Indonesia still require further efforts from the government, as seen from the flat graphs in each aspect of the SDGs.")
+        if feature_map2[scores] == 'overall_score':
+            st.write("✅Through a linechart analysis of Indonesia's SDG scores from year to year, it can be concluded that on average, Indonesia's SDG scores experienced limited progress until 2012. After 2012, there was a more significant increase in scores.")
+            st.write("✅Overall, many SDG goals in Indonesia still require further efforts from the government, as seen from the graphs that tend to be flat in each aspect of SDG and the overall score is still below 80 in 2022, it needs to be a serious concern for the Indonesian government, especially in improving 13 aspects of SDGS which are still below the score of 80 such as the zero hunger aspect, Good Health and Well Being, Gender Equality, Clean Water and Sanitation, Affordable and clean energy, Decent Work and Economic Growth, Industry Innovation and Infrastructure, Reduced Inequalities, Sustainable Cities and Communities, Life Below Water, Life on Land, Peace Justice and Strong institutions, and Partnership for the Goals.")
+        if feature_map2[scores] == 'goal_1_score':
+            st.write("✅In terms of No Poverty, there was rapid progress starting in 2010. Initially the No Poverty score was below 60 in 2010, but in 2011 the score increased consistently to over 80.")
+        if feature_map2[scores] == 'goal_2_score':
+            st.write("✅The Zero Hunger aspect has inconsistent score development and the score will still be below 80 in 2022. Therefore, concrete actions are needed to reduce the problem of hunger and malnutrition so as to increase the No Hungry score in the following year.")
+        if feature_map2[scores] ==  'goal_3_score':
+            st.write("✅The Good Health and Well Being aspect saw an increase in the score from below 60 in 2000 to above 60 in 2022, with a record of the decline and increase that occurred during the 2000-2022 period. Seeing that the score is still below 80, the government must make strategic efforts to improve the health and welfare of the community so as to increase the value of the SDG Good Health and Well Being.") 
+        if feature_map2[scores] == 'goal_4_score':
+            st.write("✅The Quality Education aspect represents a good score of above 80 in 2022. However, the increase obtained from 2000 to 2022 is not too significant. This is because in 2000 the score reached above 80, then there was a decline and increase, until finally it stabilized for 6 years starting from 2016 to 2022.")
+        if feature_map2[scores] == 'goal_5_score':
+            st.write("✅The Gender Equality aspect shows an increase in score from 2000, which was still below 60, to above 60 in the 2016-2022 period. This shows that Indonesia is still not perfect in overcoming problems related to gender equality.")
+        if feature_map2[scores] == 'goal_6_score':
+            st.write("✅The graph related to the clean water and sanitation aspect shows a steady growth increasing from 2000 to 2022 with a score above 60 and close to 80. The Indonesian government must pay attention and improve the quality of clean water and sanitation to all corners of Indonesia to improve the SDG score in the following years.")
+        if feature_map2[scores] == 'goal_7_score':
+            st.write("✅Based on the graphical data, it can be observed that Indonesia has experienced significant improvement in the aspect of Clean and Affordable Energy since 2000. The score was initially below 40, but has consistently risen to reach the 60 and above range. This increase reflects Indonesia's seriousness in prioritizing clean and affordable energy for its people. The government is expected to continue to be active in addressing issues related to clean and affordable energy through sustainable measures.")
+        if feature_map2[scores] == 'goal_8_score' :
+            st.write("✅The graph above informs that the Decent Work and Economic Growth aspect experienced stable development in the 2000-2007 period, then experienced a slow increase in the 2007-2022 period with a score close to 80. This reflects Indonesia's commitment to creating an economic environment that supports sustainable growth and decent work for its population.")
+        if feature_map2[scores] == 'goal_9_score' :
+            st.write("✅The graph illustrates the increase in scores in Industry, Innovation and Infrastructure, which initially stabilized in the 2000-2009 period below 20, but saw a rapid surge approaching 60 in the 2010-2022 period. This growth reflects Indonesia's serious efforts to develop the industry, innovation and infrastructure sectors, which have a positive impact on the economy and society.")
+        if feature_map2[scores] == 'goal_10_score' :
+            st.write("✅The score in the Reduced Inequalities aspect experienced a significant decline, especially in 2010-2011, which resulted in a drop from around 90 to around 60. This signals the need for immediate improvement in efforts to reduce inequalities in society.")
+        if feature_map2[scores] == 'goal_11_score' :
+            st.write("✅The graph above shows that the sustainable cities and communities aspect has experienced growth from below 60 in 2000, but has increased to a score close to 80. This reflects the serious efforts of the government and society in creating a sustainable urban environment and healthy communities.")
+        if feature_map2[scores] == 'goal_12_score' :
+            st.write("✅The Responsible Consumption and Production aspect represents a stable score above 80 from 2000-2022. This achievement reflects Indonesia's seriousness in facing global challenges related to sustainable consumption and production.")
+        if feature_map2[scores] == 'goal_13_score' :
+            st.write("✅The Climate Action spec shows a stable score from 2000-2000 with a score above 80. This achievement reflects Indonesia's strong commitment in facing climate change and mitigating its impacts.")
+        if feature_map2[scores] == 'goal_14_score' :
+            st.write('✅The graph shows that the Life Below Water aspect has consistently increased from a score below 60 in 2000 to above 60 in 2022. This reflects the consistent improvement of Life Below Water from a score below 60 in 2000 to above 60 in 2022. As a maritime country, this reflects the commitment of the Indonesian government and society to protect marine life, biota diversity and underwater ecosystems.')
+        if feature_map2[scores] == 'goal_15_score' :
+            st.write("✅Looking at the graph, the Life on Land aspect requires further attention from the Indonesian government. From 2000 to 2022, there has been little change and the score is low at around 40. Therefore, greater efforts are needed to maintain and restore the terrestrial ecosystem.")
+        if feature_map2[scores] == 'goal_16_score' :
+            st.write('✅Based on the graph, it can be seen that the score was stable at around 60 in the 2000-2007 period, which was then followed by fluctuations in increase and decrease in the 2008-2022 period, but the final score remained at around 60. This phenomenon illustrates that Indonesia still needs to improve peace, justice and realize strong institutions.') 
+        if feature_map2[scores] == 'goal_17_score' :
+            st.write('✅Based on the graph, the aspect of Partnership for the Goals did not experience a significant increase, marked by a score that was still below 60 during the 2000-2022 period. This shows that Indonesia must make strategic efforts in facing challenges to build strong partnerships to achieve sustainable development goals.')
 
     elif selected == 'SDG Score Prediction':
         country_names = ['Afghanistan', 'Albania', 'Algeria', 'Angola', 'Argentina',
@@ -575,7 +610,6 @@ elif menu_option == "Indonesian":
         if feature_map2[pilihan] == 'overall_score':
             st.write("✅Berdasarkan grafik skor rata-rata dari seluruh aspek SDG pada periode tahun 2000 sampai 2022 menunjukan bahwa terjadi pertumbuhan yang terus naik dengan konsisten di setiap tahunnya sehingga menggambarkan peningkatan usaha yang dilakukan oleh negara-negara dalam mengejar target SDGs 2030.")
             st.write("✅Terlihat pola serupa pada semua aspek SDG, yaitu usaha yang dilakukan mulai tahun 2020 cenderung berkurang dibandingkan dengan tahun-tahun sebelumnya. Ini tercermin dalam grafik skor yang cenderung mendatar sejak tahun 2020.")
-    
         elif feature_map2[pilihan] == 'goal_1_score':
             st.write("✅Pada Aspek Tujuan SDG (No Poverty) tidak mengalami peningkatan yang signifikan pada tahun 2000 sampai 2010, namun terjadi peningkatan yang sangat tajam dari tahun 2010 sampai 2019 yang mengindikasikan penurunan angka kemiskinan, kemudian terjadi penurunan skor pada periode 2019-2020 akibat pandemi covid-19 sehingga menyebabkan meningkatnya angka kemiskinan, akan tetapi pada periode 2019-2022 terjadi pemulihan tingkat kemiskinan yang ditandai oleh meningkatnya skor.") 
         elif feature_map2[pilihan] == 'goal_2_score':
@@ -677,18 +711,19 @@ elif menu_option == "Indonesian":
         st.subheader("Perbandingan Skor SDGs antara Dua Negara")
         negara1 = st.selectbox("Pilih Negara Pertama:", df['country'].unique())
         negara2 = st.selectbox("Pilih Negara Kedua:", df['country'].unique())
-        jenis = st.selectbox("Pilih Aspek SDG:", ['goal_1_score', 'goal_2_score', 'goal_3_score', 'goal_4_score', 'goal_5_score', 'goal_6_score', 'goal_7_score', 'goal_8_score', 'goal_9_score', 'goal_10_score', 'goal_11_score', 'goal_12_score', 'goal_13_score', 'goal_14_score', 'goal_15_score', 'goal_16_score', 'goal_17_score'])
+        scores = st.selectbox("Pilih Aspek SDG:", list(feature_map2.keys()), key='select-type2', index=0)
+        selected_column = feature_map2[scores]
 
         skor_negara1 = df[(df['country'] == negara1)]
         skor_negara2 = df[(df['country'] == negara2)]
 
         if not skor_negara1.empty and not skor_negara2.empty:
-            skor1 = skor_negara1[jenis].values[0]
-            skor2 = skor_negara2[jenis].values[0]
+            skor1 = skor_negara1[selected_column].values[0]
+            skor2 = skor_negara2[selected_column].values[0]
 
             # Menampilkan hasil perbandingan skor
-            st.write(f"Skor {jenis} pada tahun {tahun} untuk {negara1}: {skor1}")
-            st.write(f"Skor {jenis} pada tahun {tahun} untuk {negara2}: {skor2}")
+            st.write(f"Skor {selected_column} pada tahun {tahun} untuk {negara1}: {skor1}")
+            st.write(f"Skor {selected_column} pada tahun {tahun} untuk {negara2}: {skor2}")
 
             # Membuat plot perbandingan skor
             plt.figure(figsize=(6, 6))
@@ -698,9 +733,9 @@ elif menu_option == "Indonesian":
             plt.bar(r1, [skor1], color='b', width=bar_width, edgecolor='grey', label=negara1)
             plt.bar(r2, [skor2], color='orange', width=bar_width, edgecolor='grey', label=negara2)
             plt.xlabel('Negara', fontweight='bold')
-            plt.ylabel(f'Skor {jenis}', fontweight='bold')
+            plt.ylabel(f'Skor {selected_column}', fontweight='bold')
             plt.xticks([r + bar_width / 2 for r in r1 + r2], [negara1, negara2])
-            plt.title(f'Perbandingan Skor {jenis} antara {negara1}, {negara2} ({tahun})')
+            plt.title(f'Perbandingan Skor {selected_column} antara {negara1}, {negara2} ({tahun})')
             plt.legend()
             plt.show()
             st.pyplot(plt.gcf())
@@ -774,11 +809,44 @@ elif menu_option == "Indonesian":
         plt.ylim(0, 100)
         st.pyplot(plt.gcf())
         plt.close()
-        st.write("✅Melalui analisis linechart mengenai skor SDG Indonesia dari tahun ke tahun, dapat disimpulkan bahwa secara rata-rata, nilai SDG di Indonesia mengalami perkembangan yang terbatas hingga tahun 2012. Setelah tahun 2012, terlihat peningkatan skor yang lebih signifikan.")
-        st.write("✅Dalam aspek No Poverty, terdapat perkembangan pesat mulai tahun 2010. Sebelumnya, skor No Poverty berada di kisaran 60, namun mulai tahun 2010, skornya terus meningkat hingga melebihi angka 80.")
-        st.write("✅Skor dalam aspek Reduced Inequalities mengalami penurunan yang signifikan, terutama pada tahun 2010-2011, yang mengakibatkan penurunan dari sekitar 90 menjadi sekitar 60. Ini menandakan perlunya perbaikan segera dalam upaya mengurangi ketidaksetaraan.")
-        st.write("✅Selain itu, aspek Life on Land juga memerlukan perhatian lebih lanjut. Dalam rentang tahun 2000 hingga 2022, terjadi sedikit perubahan dan skor yang rendah yakni sekitar 40. Oleh karena itu, perlu upaya lebih besar untuk menjaga dan memulihkan ekosistem daratan.")
-        st.write("✅Secara keseluruhan, banyak tujuan SDG di Indonesia yang masih memerlukan usaha lebih lanjut dari pemerintah, terlihat dari grafik yang cenderung datar pada setiap aspek SDG.")
+        if feature_map2[scores] == 'overall_score':
+            st.write("✅Melalui analisis linechart mengenai skor SDG Indonesia dari tahun ke tahun, dapat disimpulkan bahwa secara rata-rata, nilai SDG di Indonesia mengalami perkembangan yang terbatas hingga tahun 2012. Setelah tahun 2012, terlihat peningkatan skor yang lebih signifikan.")
+            st.write("✅Secara keseluruhan, banyak tujuan SDG di Indonesia yang masih memerlukan usaha lebih lanjut dari pemerintah, terlihat dari grafik yang cenderung datar pada setiap aspek SDG dan skor secara keseluruhan masih berada di bawah 80 pada tahun 2022, hal itu perlu menjadi perhatian serius bagi pemerintah Indonesia terutama dalam meningkatkan 13 aspek SDGS yang masih berada di bawah skor 80 seperti aspek zero hunger, aspek Good Health and Well Being, aspek Gender Equality, aspek Clean Water and Sanitation, aspek Affordable and clean energy, aspek Decent Work and Economic Grwoth, aspek Industry Innovation and Infrastructure, aspek Reduced Inequalities, aspek Sustainable Cities and Communities, aspek Life Below Water, aspek Life on Land, aspek Peace Justice and Strong institutions, dan aspek Partnership for the Goals.")
+        if feature_map2[scores] == 'goal_1_score':
+            st.write("✅Dalam aspek No Poverty, terdapat perkembangan pesat mulai tahun 2010. Awalnya skor No Poverty berada di bawah 60 tepat di tahun 2010, namun pada tahun 2011 skornya terus meningkat secara konsisten hingga melebihi angka 80.")
+        if feature_map2[scores] == 'goal_2_score':
+            st.write("✅Aspek Zero Hunger terjadi perkembangan skor yang tidak konsisten dan skornya masih berada di bawah 80 di tahun 2022. Sehingga perlu tindakan nyata untuk mengurangi masalah kelaparan dan gizi buruk sehingga dapat meningkatkan skor No Hungry di tahun berikutnya.")
+        if feature_map2[scores] ==  'goal_3_score':
+            st.write("✅Aspek Good Health and Well Being terjadi peningkatan skor yang awalnya di bawah 60 pada tahun 2000, meningkat menjadi di atas angka 60 tepat di tahun 2022, dengan rekaman penurunan dan peningkatan yang terjadi selama periode 2000-2022. Melihat skor masih di bawah angka 80, pemerintah harus melakukan upaya strategis untuk meningkatkan kesehatan dan kesejahteraan masyrakat sehingga meningkatkan nilai SDG Good Health and Well Being.") 
+        if feature_map2[scores] == 'goal_4_score':
+            st.write("✅Aspek Quality Education menggambarkan skor yang bagus yakni di atas 80 pada tahun 2022. Namun, peningkatan yang diperoleh dari tahun 2000 sampai dengan tahun 2022 tidak terlalu signifikan peningkatan skornya. Hal itu dikarenakan pada tahun 2000 skornya sudah mencapai di atas angka 80, kemudian terjadi penurunan dan peningkatan, sampai akhirnya stabil selama 6 tahun mulai dari tahun 2016 sampai dengan 2022.")
+        if feature_map2[scores] == 'goal_5_score':
+            st.write("✅Aspek Gender Equality menunjukan peningkatan skor dari tahun 2000 yang masih di bawah angka 60 menjadi di atas 60 pada periode tahun 2016-2022. Hal itu menunjukan Indonesia masih belum sempurna dalam mengatasi masalah-masalah yang terkait kesetaraan Gender.")
+        if feature_map2[scores] == 'goal_6_score':
+            st.write("✅Grafik terkait aspek clean water and sanitation menunjukan pertumbuhan yang stabil meningkat dari tahun 2000 sampai 2022 dengan skor di atas 60 dan mendekati angka 80. Pemerintah Indonesia harus memperhatikan dan meningkatkan kualitas air bersih dan sanitasi ke seluruh pelosok Indonesia untuk meningkatkan skor SDG di tahun berikutnya.")
+        if feature_map2[scores] == 'goal_7_score':
+            st.write("✅Berdasarkan data grafik, dapat diamati bahwa Indonesia telah mengalami peningkatan yang signifikan dalam aspek Energi Bersih dan Terjangkau sejak tahun 2000. Skor awalnya berada di bawah 40, namun secara konsisten naik hingga mencapai rentang angka 60 ke atas. Peningkatan ini mencerminkan keseriusan Indonesia dalam memprioritaskan energi yang bersih dan terjangkau bagi masyarakatnya. emerintah diharapkan terus aktif dalam mengatasi masalah-masalah terkait energi bersih dan terjangkau melalui langkah-langkah yang berkelanjutan.")
+        if feature_map2[scores] == 'goal_8_score' :
+            st.write('✅Grafik di atas menginformasikan bahwa aspek Decent Work and Economic Growth mengalami perkembangan yang stabil pada periode tahun 2000-2007, kemudian mengalami peningkatan secara perlahan pada periode tahun 2007-2022 dengan skor mendekati angka 80. Hal itu mencerminkan komitmen Indonesia untuk menciptakan lingkungan ekonomi yang mendukung pertumbuhan yang berkesinambungan dan pekerjaan yang layak bagi penduduknya.')
+        if feature_map2[scores] == 'goal_9_score' :
+            st.write('✅Grafik tersebut menggambarkan peningkatan skor di bidang Industry, Innovation and Infrastructure yang awalnya stabil pada periode 2000-2009 di bawah angka 20, namun terjadi lonjakan pesat mendekati angka 60 pada periode 2010-2022. Pertumbuhan ini mencerminkan upaya serius Indonesia dalam mengembangkan sektor industri, inovasi, dan infrastruktur, yang memiliki dampak positif terhadap ekonomi dan masyarakat. ')
+        if feature_map2[scores] == 'goal_10_score' :
+            st.write("✅Skor dalam aspek Reduced Inequalities mengalami penurunan yang signifikan, terutama pada tahun 2010-2011, yang mengakibatkan penurunan dari sekitar 90 menjadi sekitar 60. Ini menandakan perlunya perbaikan segera dalam upaya mengurangi kesenjangan dalam masyarakat.")
+        if feature_map2[scores] == 'goal_11_score' :
+            st.write('✅Grafik di atas menunjukan aspek sustainable cities and communities mengalami pertumbuhan yang awalnya di bawah angka 60 pada tahun 2000, namun terjadi peningkatan skor hingga mendekati angka 80. Hal ini mencerminkan upaya serius pemerintah dan masyarakat dalam menciptakan lingkungan kota yang berkelanjutan dan komunitas yang sehat.')
+        if feature_map2[scores] == 'goal_12_score' :
+            st.write('✅Aspek Responsible Consumption and Production menggambarkan skor yang stabil di atas angka 80 dari tahun 2000-2022. Pencapaian ini mencerminkan kesungguhan Indonesia dalam menghadapi tantangan global terkait konsumsi dan produksi yang berkelanjutan.')
+        if feature_map2[scores] == 'goal_13_score' :
+            st.write('✅Aspek Climate Action menunjukan kestabilan skor dari tahun 2000-2000 dengan skor di atas 80. Pencapaian ini mencerminkan komitmen kuat Indonesia dalam menghadapi perubahan iklim dan memitigasi dampaknya.')
+        if feature_map2[scores] == 'goal_14_score' :
+            st.write('✅Grafik menunjukan aspek Life Below Water mengalami peningkatan yang konsisten dari skor di bawah 60 pada tahun 2000 menjadi di atas 60 pada tahun 2022. Hal ini mencerminkan Grafik menunjukan aspek Life Below Water mengalami peningkatan yang konsisten dari skor di bawah 60 pada tahun 2000 menjadi di atas 60 pada tahun 2022. Sebagai negara maritim, hal ini mencerminkan komitmen pemerintah dan masyarakat Indonesia dalam melindungi kehidupan laut, keanekaragaman biota, dan ekosistem bawah air.')
+        if feature_map2[scores] == 'goal_15_score' :
+            st.write("✅Melihat grafik tersebut, aspek Life on Land memerlukan perhatian lebih lanjut dari pemerintah Indonesia. Dalam rentang tahun 2000 hingga 2022, terjadi sedikit perubahan dan skor yang rendah yakni sekitar 40. Oleh karena itu, perlu upaya lebih besar untuk menjaga dan memulihkan ekosistem daratan.")
+        if feature_map2[scores] == 'goal_16_score' :
+            st.write('✅Berdasarkan grafik, terlihat adanya kestabilan skor di kisaran 60 pada periode 2000-2007, yang kemudian diikuti oleh fluktuasi peningkatan dan penurunan pada periode 2008-2022, namun skor akhirnya tetap bertahan di kisaran angka 60. Fenomena ini memberikan gambaran bahwa Indonesia masih perlu meningkatkan perdamaian, keadilan dan mewujudkan kelembagaan yang tangguh.') 
+        if feature_map2[scores] == 'goal_17_score' :
+            st.write('✅Berdasarkan grafik, aspek Partneship for the Goals tidak mengalami peningkatan yang signifikan dengan ditandai skor yang masih di bawah 60 selama periode 2000-2022. Hal ini menunjukan Indonesia harus melakukan upaya strategis dalam menghadapi tantangan untuk membangun kemitraan yang kuat untuk mencapai tujuan pembangunan berkelanjutan.')
+       
 
     elif selected == 'Prediksi Skor SDG':
         country_names = ['Afghanistan', 'Albania', 'Algeria', 'Angola', 'Argentina',
@@ -854,7 +922,7 @@ add_bg_from_url()
 st.markdown(
     """
     ---
-    <p style='font-size:14px;'>Made with ❤️ by PisangGorengRaja Team.<br>
+    <p style='font-size:14px;'>Made with ❤️ by SIC HACKATHON Team.<br>
     Source of dataset: <a href='https://www.kaggle.com/datasets/sazidthe1/sustainable-development-report' target='_blank'>Sustainable Development Report Dataset</a></p>
     """,
     unsafe_allow_html=True
