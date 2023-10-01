@@ -6,6 +6,7 @@ from streamlit.connections import SQLConnection
 import seaborn as sns
 from streamlit_option_menu import option_menu
 import pickle
+import xgboost as xgb
 
 #conn = st.experimental_connection('sdg_db', type="sql")
 query2023 = "SELECT * FROM sdg_2023"
@@ -16,7 +17,7 @@ conn: SQLConnection = st.experimental_connection('sdg_db', type='sql')
 df2023: pd.DataFrame = conn.query(query2023)
 df2000: pd.DataFrame = conn.query(query2000)
 
-with open('model/model_new.pkl', 'rb') as model_file:
+with open('model/model_new3.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 # @st.cache_resource
 # def get_data_from_db(query):
@@ -900,7 +901,7 @@ elif menu_option == "Indonesian":
         predict_input = [[selected_negara, 2030]]
 
         predict = model.predict(predict_input)
-        st.write(f"Skor SDG untuk Negara {negara} di tahun 2030 adalah {predict[0]}")
+        st.write(f"Skor SDG untuk Negara {negara} di tahun 2030 adalah {predict}")
 
 #background
 def add_bg_from_url():
