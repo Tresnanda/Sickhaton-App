@@ -286,7 +286,8 @@ if menu_option == "English":
             st.subheader("There are no pairs with high correlation")
         
         st.divider()
-        
+
+        st.subheader("SDGs Score Comparison between Two Countries")
         # Menambahkan pilihan tahun untuk data tahun 2023 dan 2000-2022
         tahun_option = st.selectbox("Select SDG score data period", ["2023", "2000-2022"])
         tahun = None
@@ -299,8 +300,7 @@ if menu_option == "English":
         else:
             tahun = st.selectbox("Select Year (2000-2022):", df2000['year'].unique())
             df = df2000[df2000['year'] == tahun]
-
-        st.subheader("SDGs Score Comparison between Two Countries")
+        
         negara1 = st.selectbox("Select Country First:", df['country'].unique())
         negara2 = st.selectbox("Select Second Country:", df['country'].unique())
 
@@ -696,6 +696,8 @@ elif menu_option == "Indonesian":
             st.subheader("Tidak ada pasangan dengan korelasi tinggi")
         
         st.divider()
+
+        st.subheader("Perbandingan Skor SDGs antara Dua Negara")
         
         # Menambahkan pilihan tahun untuk data tahun 2023 dan 2000-2022
         tahun_option = st.selectbox("Pilih periode data SDG", ["2023", "2000-2022"])
@@ -708,8 +710,7 @@ elif menu_option == "Indonesian":
         else:
             tahun = st.selectbox("Pilih Tahun (2000-2022):", df2000['year'].unique())
             df = df2000[df2000['year'] == tahun]
-
-        st.subheader("Perbandingan Skor SDGs antara Dua Negara")
+            
         negara1 = st.selectbox("Pilih Negara Pertama:", df['country'].unique())
         negara2 = st.selectbox("Pilih Negara Kedua:", df['country'].unique())
         scores = st.selectbox("Pilih Aspek SDG:", list(feature_map2.keys()), key='select-type2', index=0)
